@@ -25,10 +25,10 @@
       </div>      
       <div id="main-navigation">
         <ul class="wat-cf">
-          <li><%= link_to t("web-app-theme.clients", :default => "Categories"), categories_path %></li>
-          <li><%= link_to t("web-app-theme.waiting_lists", :default => "Services"), services_path %></li>
-          <li><%= link_to t("web-app-theme.clients", :default => "Users"), users_path %></li>
-          <li><%= link_to t("web-app-theme.waiting_lists", :default => "Roles"), roles_path %></li>
+          <li <% if params[:controller] == "categories" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "Categories"), categories_path %></li>
+          <li <% if params[:controller] == "services" %> class="active"<%end%>><%= link_to t("web-app-theme.waiting_lists", :default => "Services"), services_path %></li>
+          <li <% if params[:controller] == "users" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "Users"), users_path %></li>
+          <li <% if params[:controller] == "roles" %> class="active"<%end%>><%= link_to t("web-app-theme.waiting_lists", :default => "Roles"), roles_path %></li>
         </ul>
       </div>
     </div>    

@@ -14,8 +14,9 @@
           <%if user_signed_in?%>
           <li><%= link_to t("web-app-theme.clients", :default => "Logged in as #{current_user.email}"), edit_user_registration_path %></li>
           <%end%>
-          
+          <% if has_role?(:admin) %>
           <li><%= link_to t("web-app-theme.clients", :default => "Admin"), categories_path %></li>
+          <% end %>
           <%if user_signed_in?%>
           <li><a href="/users/sign_out" class="logout"><%= t("web-app-theme.logout", :default => "Logout") %></a></li>
           <%else%>
@@ -25,8 +26,8 @@
       </div>      
       <div id="main-navigation">
         <ul class="wat-cf">
-          <li><%= link_to t("web-app-theme.clients", :default => "Clients"), clients_path %></li>
-          <li><%= link_to t("web-app-theme.waiting_lists", :default => "Referrals"), waiting_lists_path %></li>
+          <li <% if params[:controller] == "clients" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "Clients"), clients_path %></li>
+          <li <% if params[:controller] == "waiting_lists" %> class="active"<%end%>><%= link_to t("web-app-theme.waiting_lists", :default => "Referrals"), waiting_lists_path %></li>
         </ul>
       </div>
     </div>    
