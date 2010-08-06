@@ -1,0 +1,125 @@
+             <form action="/clients/" method="get">
+              <%= text_field_tag :searchclients, params[:searchclients] %>
+              <%= submit_tag "search for client", :name => nil%>
+             </form>
+             <br />
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", clients_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_client_path %></li>
+    </ul>
+  </div>  
+  <form action="/clients/waiting" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="<%= form_authenticity_token%>" /></div>       
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Clients</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+										<th>
+					<%= t("activerecord.attributes.client.first_name", :default => t("activerecord.labels.first_name", :default => "Name")) %>
+</th>
+					          <th><%= t("web-app-theme.last_name", :default => "Birth Date")  %></th>
+					          <th><%= t("web-app-theme.birth_date", :default => "Gender")  %></th>
+					           <th><%= t("web-app-theme.country", :default => "Age")  %></th>
+					          <th><%= t("web-app-theme.created_at", :default => "Country of Birth")  %></th>
+					          <th><%= t("web-app-theme.created_at", :default => "Case Note Status")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @clients.each do |client| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          
+            <td scope="row" id="r97">
+                <input type="radio" name="radio" value="<%= client.id %>" checked/> </td>
+            <td>
+                <%= link_to h(truncate(client.first_name)) + " " + h(truncate(client.last_name)) , :action => 'edit', :id => client %>
+            </td>
+            
+            <td>
+                <a href=""><%= nice_date client.birth_date %></a>
+            </td>
+            <td>
+                <%= male_or_female client.gender %>
+            </td>
+            <td>
+              <!-- TODO FRONTYARD need to fix date display for nil -->
+              <% if client.birth_date == "1900-01-01"%>
+        '<div id="wrong_age">NULL</div>'
+        <%else%>
+                <%= age_now = age(Date.today, client.birth_date)
+                if age_now > 24
+                '<div id="wrong_age">' + h(age_now) + '</div>'
+                elsif age_now < 12
+                '<div id="wrong_age">' + h(age_now) + '</div>'
+                else
+                age_now
+                end %>
+        <%end%>
+            </td>
+            <td>
+              <% if !client.country.nil? %>
+                <%= client.country.printable_name%>
+        <% else %>
+        <%= client.country.to_s + "!" %>
+        <% end %>
+            </td>
+            <td> 
+    <!-- client.case_note.subject -->
+    
+    <% case_note = CaseNote.find(:first,:conditions => ['client_id = ' + client.id.to_s], :order => 'updated_at DESC')%>
+    <% if !case_note.nil?%>
+    <%= link_to truncate(case_note.subject + ": " + case_note.body,50) , client_case_notes_path(@case_note, client) %>
+    <% else %>
+    <%= link_to 'Add new casenote' , new_client_case_note_path(@case_note, client) %>
+    <%end%>
+    
+                 
+            </td>
+          <td class="last">
+            <%#= link_to "#{t("web-app-theme.show", :default => "Show")}", client_path(client) %> 
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_client_path(client) %> 
+            <%#= link_to "#{t("web-app-theme.delete", :default => "Delete")}", client_path(client), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @clients  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<%#content_for :sidebar, render(:partial => 'sidebar') -%>
+<%content_for :sidebar do -%>
+<div class="block">
+  <h3>Referrer</h3>
+  <br />
+  <div class="content">
+        
+            
+            <span style="padding-left:15px"><%= link_to "All Services" + 
+              " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL'])) + ")", waiting_lists_path%></span>
+            <br />
+          <% for service in @services %>
+            
+            <input type="checkbox" id="<%= service.service_name %>dd" name="<%= service.service_name %>dd" value="<%= service.id %>"/>
+              <%= link_to service.service_name + " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL AND service_id=?', service.id.to_s + '%'])) + ")", :controller => "waiting_lists", :action => "index", :id => service.id %>
+            <span style="padding-left:10px"><%= category_selector(service.id, service.service_name) %></span>
+            <br />
+          <% end %>
+            <br />
+            
+          <%= submit_tag "add selected client", :class => "button" %>
+       
+    </div>
+</div>
+
+</form>
+
+<%end%>

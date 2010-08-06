@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  client: 
+  service: 
+  referral_date: 2010-07-24 21:00:56
+  accepted_date: 2010-07-24 21:00:56
+  completed_date: 2010-07-24 21:00:56
+
+two:
+  client: 
+  service: 
+  referral_date: 2010-07-24 21:00:56
+  accepted_date: 2010-07-24 21:00:56
+  completed_date: 2010-07-24 21:00:56

@@ -1,0 +1,51 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", client_case_notes_path  %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "Add New Casenote")}", new_client_case_note_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> CaseNotes for <%= @client.first_name + " " + @client.last_name%></h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+										<th>
+					<%= t("activerecord.attributes.case_note.user_id", :default => t("activerecord.labels.user_id", :default => "User_id")) %>
+</th>
+					          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @case_notes.each do |case_note| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= case_note.id %>
+          </td>
+										<td>
+						<%= link_to case_note.user.email, client_case_note_path(@client,case_note) %><br />
+						<%= case_note.created_at %>
+					</td>
+										<td>
+            <%= case_note.body %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", client_case_note_path(@client,case_note) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_client_case_note_path(@client,case_note) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", client_case_note_path(@client,case_note), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @case_notes  %>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
