@@ -1,1 +1,40 @@
 /* Override here any style definide by web-app-theme */
+
+#sidebar {
+  width: 25%;
+  float: right;
+  position: relative      
+}
+
+#sidebar .block {
+  background: #FFF;
+}
+
+#sidebar .block .content p{
+  padding: 4px
+}
+
+#sidebar .block .content .checkbox{
+  background: #FFF;
+  position: absolute;
+  left: 15px;
+  top: 25;
+}
+
+#sidebar .block .content .services{
+  background: #FFF;
+  position: absolute;
+  left: 35px;
+  top: 25;
+  font-weight: bold;
+  color: gray;
+}
+
+#sidebar .block .content select{
+  background: #fff;
+  float: none;
+  position: absolute;
+  left: 200px;
+  top: 25;
+  clear: none;
+}

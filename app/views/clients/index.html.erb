@@ -3,7 +3,7 @@
     <ul class="wat-cf">
 	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", clients_path  %></li>
   		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_client_path %></li>
-  		      <form action="/clients/" method="get" style = "padding-top: 8px;">
+  		      <form action="/clients/" method="get" style = "padding-top: 9px; padding-left: 730px">
               <%= text_field_tag :searchclients, params[:searchclients] %>
               <%= submit_tag "search for client", :name => nil%>
              </form>
@@ -103,20 +103,19 @@
   <br />
   <div class="content">
         
-          
-       <span class = "allservices"><%= link_to "All Services" + 
+       <p>  
+       <span class = "services"><%= link_to "All Services" + 
               " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL'])) + ")", waiting_lists_path%>
-       </span>
-            <br />
+       </span></p>
           <% for service in @services %>
-            
+       <p>      
        <span class = "checkbox"><input type="checkbox" id="<%= service.service_name %>dd" name="<%= service.service_name %>dd" value="<%= service.id %>"/></span>
               <span class = "services"><%= link_to service.service_name + " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL AND service_id=?', service.id.to_s + '%'])) + ")", {:controller => "waiting_lists", :action => "index", :id => service.id} %>
        </span>
-       <span class = "dropdown">
+       
             <%= category_selector(service.id, service.service_name) %>
-       </span>
-            <br />
+       </p>
+            
        
           <% end %>
             <br />
