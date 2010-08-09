@@ -4,7 +4,7 @@ class CaseNotesController < ApplicationController
   layout "application"
   cattr_reader :per_page
   @@per_page = 50
-  filter_resource_access
+  filter_access_to :all
   # GET /case_notes
   # GET /case_notes.xml
   def index

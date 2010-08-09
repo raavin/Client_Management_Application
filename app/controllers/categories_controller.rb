@@ -1,8 +1,9 @@
 class CategoriesController < ApplicationController
+  before_filter :authenticate_user!
   layout "admin"
   cattr_reader :per_page
   @@per_page = 50
-  filter_resource_access
+  filter_access_to :all
   # GET /categories
   # GET /categories.xml
   def index

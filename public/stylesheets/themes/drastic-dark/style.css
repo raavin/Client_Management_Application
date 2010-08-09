@@ -113,6 +113,35 @@ hr {
   background: #FFF;
 }
 
+#sidebar .block .content .allservices{
+  background: #FFF;
+  position: relative;
+  left: 21px;
+  font-weight: bold;
+  color: gray;
+}
+
+#sidebar .block .content .checkbox{
+  background: #FFF;
+  left: 5px;
+}
+
+#sidebar .block .content .services{
+  background: #FFF;
+  position: relative;
+  left: 5px;
+  font-weight: bold;
+  color: gray;
+}
+
+#sidebar .block .content .dropdown{
+  background: #fff;
+  float: none;
+  position: absolute;
+  left: 200px;
+  clear: none;
+}
+
 #sidebar .block h4 {
   font-weight: bold;
 }

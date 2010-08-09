@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :roles
 
-
   map.devise_for :users
   
   map.resources :users
@@ -10,7 +9,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :categories
 
-#map.waiting '/clients/waiting', :controller => 'clients', :action => 'waiting'
   map.resources :waiting_lists
 
   map.resources :services

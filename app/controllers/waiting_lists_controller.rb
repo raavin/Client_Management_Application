@@ -1,7 +1,8 @@
 class WaitingListsController < ApplicationController
   before_filter :authenticate_user!
   layout "application"
-  filter_resource_access
+  filter_access_to :all
+  
   # GET /waiting_lists
   # GET /waiting_lists.xml
   def index

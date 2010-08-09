@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Web App</title>
-  <%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/warehouse/style", :cache => true %>
+  <%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/default/style", :cache => true %>
 </head>
 <body>
   <div id="container">
@@ -29,6 +29,8 @@
           <li <% if params[:controller] == "services" %> class="active"<%end%>><%= link_to t("web-app-theme.waiting_lists", :default => "Services"), services_path %></li>
           <li <% if params[:controller] == "users" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "Users"), users_path %></li>
           <li <% if params[:controller] == "roles" %> class="active"<%end%>><%= link_to t("web-app-theme.waiting_lists", :default => "Roles"), roles_path %></li>
+          <li <% if params[:controller] == "authorization_usages" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "Authorisations"), authorization_usages_path %></li>
+          
         </ul>
       </div>
     </div>    

@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
   layout "admin"
   # GET /users
   # GET /users.xml
-  filter_resource_access
+  filter_access_to :all
+  
   def index
     @users = User.all
 

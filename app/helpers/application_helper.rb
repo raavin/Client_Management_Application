@@ -1,4 +1,5 @@
 # Methods added to this helper will be available to all templates in the application.
+#require 'html_util'
 module ApplicationHelper
     def nice_date(date)
       h date.strftime("%d/%m/%Y")
@@ -10,6 +11,7 @@ module ApplicationHelper
           "Female"
       end
   end    
+  
   def country_selector(number)
     select("client", "country_id", 
     Country.find(:all).collect {|c| [ c.printable_name, c.id ]}, 

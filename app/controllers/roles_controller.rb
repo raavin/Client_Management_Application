@@ -1,6 +1,8 @@
 class RolesController < ApplicationController
+  before_filter :authenticate_user!
   layout "admin"
-  filter_resource_access
+  filter_access_to :all
+  
   # GET /roles
   # GET /roles.xml
   def index

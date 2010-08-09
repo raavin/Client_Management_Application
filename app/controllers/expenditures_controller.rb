@@ -4,7 +4,8 @@ class ExpendituresController < ApplicationController
   layout "application"
   cattr_reader :per_page
   @@per_page = 50
-  filter_resource_access
+  filter_access_to :all
+  
   # GET /expenditures
   # GET /expenditures.xml
   def index

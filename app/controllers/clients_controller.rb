@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
     layout "application"
     cattr_reader :per_page
     @@per_page = 50
-    filter_resource_access
+    filter_access_to :all
   
   # GET /clients
   # GET /clients.xml
@@ -98,39 +98,6 @@ class ClientsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(clients_url) }
       format.xml  { head :ok }
-    end
-  end
-  
- def waiting
-    @services = Service.paginate :page => params[:page]
-    @waiting_lists = WaitingList.paginate :page => params[:page], :per_page => 50
-    if request.post?
-      
-      for service in @services
-        if params[service.service_name + "dd"]
-          @waiting_list = WaitingList.create(
-          :client_id  => params[:radio],
-          :service_id => service.id,
-          :category_id => params[service.service_name][:id],
-          :referral_date => Time.now
-          )
-          
-          # TODO Need to do the verification Flash notice properly. Currently does not work for more than 2 referrals at once
-            
-          flash[:notice] = 'Client was successfully added to referral list.'
-          
-        else
-          
-          flash[:error] = 'Client was not added to the referral list.'
-          
-          @waiting_list = 0
-        end
-      end
-        if @waiting_list
-          redirect_to :action => 'index'
-        else
-          render :action => 'index'
-        end
     end
   end
   

@@ -1,15 +1,16 @@
-             <form action="/clients/" method="get">
-              <%= text_field_tag :searchclients, params[:searchclients] %>
-              <%= submit_tag "search for client", :name => nil%>
-             </form>
-             <br />
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
 	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", clients_path  %></li>
   		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_client_path %></li>
+  		      <form action="/clients/" method="get" style = "padding-top: 8px;">
+              <%= text_field_tag :searchclients, params[:searchclients] %>
+              <%= submit_tag "search for client", :name => nil%>
+             </form>
+             
     </ul>
   </div>  
+  
   <form action="/clients/waiting" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="<%= form_authenticity_token%>" /></div>       
   <div class="content">          
     <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Clients</h2>
@@ -31,7 +32,7 @@
         <tr class="<%= cycle("odd", "even") %>">
           
             <td scope="row" id="r97">
-                <input type="radio" name="radio" value="<%= client.id %>" checked/> </td>
+                <input type="radio" name="radio" id="radio" value="<%= client.id %>" checked/> </td>
             <td>
                 <%= link_to h(truncate(client.first_name)) + " " + h(truncate(client.last_name)) , :action => 'edit', :id => client %>
             </td>
@@ -102,16 +103,21 @@
   <br />
   <div class="content">
         
-            
-            <span style="padding-left:15px"><%= link_to "All Services" + 
-              " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL'])) + ")", waiting_lists_path%></span>
+          
+       <span class = "allservices"><%= link_to "All Services" + 
+              " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL'])) + ")", waiting_lists_path%>
+       </span>
             <br />
           <% for service in @services %>
             
-            <input type="checkbox" id="<%= service.service_name %>dd" name="<%= service.service_name %>dd" value="<%= service.id %>"/>
-              <%= link_to service.service_name + " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL AND service_id=?', service.id.to_s + '%'])) + ")", :controller => "waiting_lists", :action => "index", :id => service.id %>
-            <span style="padding-left:10px"><%= category_selector(service.id, service.service_name) %></span>
+       <span class = "checkbox"><input type="checkbox" id="<%= service.service_name %>dd" name="<%= service.service_name %>dd" value="<%= service.id %>"/></span>
+              <span class = "services"><%= link_to service.service_name + " (" + h(WaitingList.count(:conditions => ['completed_date IS NULL AND service_id=?', service.id.to_s + '%'])) + ")", {:controller => "waiting_lists", :action => "index", :id => service.id} %>
+       </span>
+       <span class = "dropdown">
+            <%= category_selector(service.id, service.service_name) %>
+       </span>
             <br />
+       
           <% end %>
             <br />
             

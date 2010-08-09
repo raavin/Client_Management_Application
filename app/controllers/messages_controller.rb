@@ -1,7 +1,9 @@
 class MessagesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /messages
   # GET /messages.xml
-  filter_resource_access
+  filter_access_to :all
+  
   def index
     @messages = Message.all
 
