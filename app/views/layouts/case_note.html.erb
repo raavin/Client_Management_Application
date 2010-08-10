@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Web App</title>
+	<%= stylesheet_link_tag "web_app_theme", "web_app_theme_override", "themes/drastic-dark/style", :cache => true %>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <h1><a href="/">SKYS Database</a></h1>
+      <div id="user-navigation">
+        <ul class="wat-cf">
+          <%if user_signed_in?%>
+          <li><%= link_to t("web-app-theme.clients", :default => "Logged in as #{current_user.email}"), edit_user_registration_path %></li>
+          <%end%>
+          <% if has_role?(:admin) %>
+          <li><%= link_to t("web-app-theme.clients", :default => "Admin"), categories_path %></li>
+          <% end %>
+          <%if user_signed_in?%>
+          <li><a href="/users/sign_out" class="logout"><%= t("web-app-theme.logout", :default => "Logout") %></a></li>
+          <%else%>
+          <li><a href="/users/sign_in" class="logout"><%= t("web-app-theme.logout", :default => "Login") %></a></li>
+          <%end%>
+        </ul>
+      </div>      
+      <div id="main-navigation">
+        <ul class="wat-cf">
+          <li <% if params[:controller] == "clients" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "Clients"), clients_path %></li>
+          <li <% if params[:controller] == "waiting_lists" %> class="active"<%end%>><%= link_to t("web-app-theme.waiting_lists", :default => "Referrals"), waiting_lists_path %></li>
+          <li <% if params[:controller] == "expenditires" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "#{@client.first_name}'s Expenditures"), client_expenditures_path %></li>
+          <li <% if params[:controller] == "case_notes" %> class="active"<%end%>><%= link_to t("web-app-theme.clients", :default => "#{@client.first_name}'s Case Notes"), client_case_notes_path %></li>
+        </ul>
+      </div>
+    </div>    
+    <div id="wrapper" class="wat-cf">
+      <div class="flash">
+     <% if flash[:notice] && flash[:error]%> 
+        <% if flash[:notice]%> 
+        <div class="message notice"><p><%= flash[:notice] %></p></div>
+        <%end%>
+    <%elsif flash[:error]%>
+          <div class="message error"><p><%= flash[:error] %></p></div>
+    <%elsif flash[:warning]%>
+          <div class="message warning"><p><%= flash[:warning] %></p></div>
+    <%else%>
+        <% if flash[:notice]%>
+          <div class="message notice"><p><%= flash[:notice] %></p></div>
+        <%end%>
+    <%end%>
+      </div>
+      <div id="main">
+        <%= yield %>
+        <div id="footer">
+          <div class="block">
+            <p>Copyright &copy; <%= Time.now.year %> Your Site.</p>
+          </div>      
+        </div>
+      </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

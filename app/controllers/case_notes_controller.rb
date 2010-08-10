@@ -1,7 +1,7 @@
 class CaseNotesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_client
-  layout "application"
+  layout "case_note"
   cattr_reader :per_page
   @@per_page = 50
   filter_access_to :all

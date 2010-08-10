@@ -1,7 +1,7 @@
 
   <div class="group">
     <%= f.label :service_id, t("activerecord.attributes.category.service_id", :default => "Service"), :class => :label %>
-    <%=  select("category", "service_id", 
+    <%=  select("expenditure", "service_id", 
     Service.find(:all).collect {|c| [ c.service_name, c.id ]}, 
     { :include_blank => false})%>
     <span class="description">Ex: a simple text</span>

@@ -2,20 +2,24 @@
   <div class="secondary-navigation">
     <ul class="wat-cf">
 	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", client_expenditures_path  %></li>
-  		<li><%= link_to "#{t("web-app-theme.new", :default => "Add New Casenote")}", new_client_expenditure_path %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "Add New Casenote")}", new_client_case_note_path %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "Add New Expenditure")}", new_client_expenditure_path %></li>
     </ul>
   </div>          
   <div class="content">          
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> CaseNotes for <%= @client.first_name + " " + @client.last_name%></h2>
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Expenditures for <%= @client.first_name + " " + @client.last_name%></h2>
     <div class="inner">
       <table class="table">
         <tr>             
-          <th class="first">ID</th>
+          <th class="first">Receipt No</th>
 										<th>
-					<%= t("activerecord.attributes.expenditure.user_id", :default => t("activerecord.labels.user_id", :default => "User_id")) %>
+					<%= t("activerecord.attributes.expenditure.user_id", :default => t("activerecord.labels.user_id", :default => "User")) %>
+</th>
+<th>
+          <%= t("activerecord.attributes.expenditure.user_id", :default => t("activerecord.labels.user_id", :default => "Service")) %>
 </th>
 					          <th><%= t("web-app-theme.created_at", :default => "Description")  %></th>
-					          <th><%= t("web-app-theme.created_at", :default => "Amount")  %></th>
+					          <th style = "text-align: right;"><%= t("web-app-theme.created_at", :default => "Amount")  %></th>
           <th class="last">&nbsp;</th>
         </tr>
         <% @expenditures.each do |expenditure| -%>
@@ -25,13 +29,17 @@
           </td>
 										<td>
 					
-						<%= expenditure.created_at %>
+						<%= expenditure.user.email %>
 					</td>
+					<td>
+          
+            <%= expenditure.service.service_name %>
+          </td>
 										<td>
             <%= expenditure.description %>
           </td>
-                              <td>
-            $<%= expenditure.amount %>
+                              <td style = "text-align: right;">
+            <%= number_to_currency(expenditure.amount) %>
           </td>
           <td class="last">
             <%= link_to "#{t("web-app-theme.show", :default => "Show")}", client_expenditure_path(@client,expenditure) %> |
@@ -47,11 +55,14 @@
                     <td>
 
           </td>
-                    <td>
-            Total
+          <td>
+
           </td>
-                              <td>
-            $<%=Expenditure.sum('amount')%>
+                    <td>
+            <b>Total</b>
+          </td>
+          <td style = "text-align: right;">
+            <b><%= number_to_currency(@client_total) %></b>
           </td>
           <td class="last">
           </td>
@@ -69,4 +80,4 @@
   </div>
 </div>
 
-<% content_for :sidebar, render(:partial => 'sidebar') -%>
+<% content_for :sidebar, render(:partial => 'shared/sidebar') -%>

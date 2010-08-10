@@ -7,7 +7,7 @@ class WaitingListsController < ApplicationController
   # GET /waiting_lists.xml
   def index
     #@client = Client.find(params[:id])
-    @services = Service.all
+    @services = Service.find(:all, :order => "service_name")
     @categories = Category.all
     @waiting_lists = WaitingList.paginate :page => params[:page],
       :per_page => 10, 

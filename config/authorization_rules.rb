@@ -9,6 +9,11 @@ authorization do
   has_permission_on [:users], :to => [:index, :show, :update]
   end  
   
+  role :accounts do  
+  has_permission_on [:clients, :messages, :expenditures], :to => [:index, :show, :new, :create, :edit, :update, :destroy]
+  has_permission_on [:users], :to => [:index, :show, :update]
+  end 
+  
   role :supervisor do
   has_permission_on [:clients, :services, :waiting_lists, :categories, :messages, :roles, :authorization_rules, :case_notes, :expenditures], :to => [:index, :show, :new, :create, :edit, :update, :destroy] 
   end 

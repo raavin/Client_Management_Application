@@ -5,7 +5,7 @@
     </ul>
   </div>          
   <div class="content">          
-    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> WaitingLists</h2>
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Referrals</h2>
     <div class="inner">
       <table class="table">
         <tr>             
@@ -66,9 +66,9 @@
   
   <td>
       <% if waiting_list.accepted_date.nil? %>
-        <%= time_diff_in_minutes(waiting_list.referral_date, Time.now) %> minutes
+        <%= distance_of_time_in_words(waiting_list.referral_date, Time.now) %>
     <% else %>
-    <%= time_diff_in_minutes(waiting_list.referral_date, waiting_list.accepted_date) %> minutes
+    <%= distance_of_time_in_words(waiting_list.referral_date, waiting_list.accepted_date) %>
     <% end %>
         
     </td>

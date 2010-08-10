@@ -1,7 +1,7 @@
 class ExpendituresController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_client
-  layout "application"
+  layout "expenditure"
   cattr_reader :per_page
   @@per_page = 50
   filter_access_to :all
@@ -11,6 +11,7 @@ class ExpendituresController < ApplicationController
   def index
     @services   = Service.all
     @expenditures = @client.expenditures.paginate :page => params[:page], :per_page => 10, :order => "created_at DESC"
+    @client_total = Expenditure.calculate(:sum, :amount, :conditions => ['client_id = ?', params[:client_id]])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -57,10 +58,11 @@ class ExpendituresController < ApplicationController
     @services = Service.find(:all)
     @expenditure = @client.expenditures.build(params[:expenditure])
     @expenditure.user_id = current_user.id
+    @expenditure.service_id = params[:category][:service_id]
     
     respond_to do |format|
       if @expenditure.save
-        format.html { redirect_to(client_expenditures_path, :notice => 'Expenditure was successfully created.') }
+        format.html { redirect_to(client_expenditure_path(@client, @expenditure), :notice => 'Expenditure was successfully created.') }
         format.xml  { render :xml => @expenditure, :status => :created, :location => @expenditure }
       else
         format.html { render :action => "new" }

@@ -6,6 +6,14 @@
   </div>
 
   <div class="group">
+    <%= f.label :amount, t("activerecord.attributes.expenditure.amount", :default => "Service"), :class => :label %>
+    <%=  select("category", "service_id", 
+    Service.find(:all).collect {|c| [ c.service_name, c.id ]}, 
+    { :include_blank => false})%>
+    <span class="description">Ex: a simple text</span>
+  </div>
+  
+  <div class="group">
     <%= f.label :description, t("activerecord.attributes.expenditure.description", :default => "Description"), :class => :label %>
     <%= f.text_area :description, :class => 'text_area' %>
     <span class="description">Ex: a simple text</span>
@@ -17,3 +25,4 @@
   </button>  
   <%= link_to "#{image_tag("web-app-theme/cross.png", :alt => "#{t("web-app-theme.cancel", :default => "Cancel")}")} #{t("web-app-theme.cancel", :default => "Cancel")}", client_expenditures_path, :class => "button" %> 
 </div>
+

@@ -8,6 +8,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.xml
   def index
+   
     @countries  = params[:client]
     @categories = Category.find(:all,:order => "service_id, name") 
     if params[:searchclients]

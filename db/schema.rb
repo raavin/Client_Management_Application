@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100806023230) do
+ActiveRecord::Schema.define(:version => 20100810031636) do
 
   create_table "case_notes", :force => true do |t|
     t.integer  "user_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20100806023230) do
     t.float    "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "service_id"
   end
 
   create_table "messages", :force => true do |t|

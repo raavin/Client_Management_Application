@@ -2,7 +2,7 @@
   <div class="secondary-navigation">
     <ul class="wat-cf">
 	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", clients_path  %></li>
-  		<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_client_path %></li>
+  		<li><%= link_to "#{t("web-app-theme.new", :default => "New Client")}", new_client_path %></li>
   		      <form action="/clients/" method="get" style = "padding-top: 9px; padding-left: 730px">
               <%= text_field_tag :searchclients, params[:searchclients] %>
               <%= submit_tag "search for client", :name => nil%>
@@ -26,6 +26,7 @@
 					           <th><%= t("web-app-theme.country", :default => "Age")  %></th>
 					          <th><%= t("web-app-theme.created_at", :default => "Country of Birth")  %></th>
 					          <th><%= t("web-app-theme.created_at", :default => "Case Note Status")  %></th>
+          <th>Expenditure</th>
           <th class="last">&nbsp;</th>
         </tr>
         <% @clients.each do |client| -%>
@@ -77,6 +78,7 @@
     
                  
             </td>
+            <td style = "text-align: right;"><%= link_to number_to_currency(Expenditure.calculate(:sum, :amount, :conditions => ['client_id = ?', client.id])), client_expenditures_path(client) %></td>
           <td class="last">
             <%#= link_to "#{t("web-app-theme.show", :default => "Show")}", client_path(client) %> 
             <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_client_path(client) %> 
@@ -100,7 +102,6 @@
 <%content_for :sidebar do -%>
 <div class="block">
   <h3>Referrer</h3>
-  <br />
   <div class="content">
         
        <p>  
