@@ -97,8 +97,11 @@ class WaitingListsController < ApplicationController
   
     def accept
     @waiting_list = WaitingList.find(params[:id])
-    if @waiting_list.update_attributes(
-          :accepted_date => Time.now)
+    if @waiting_list.update_attributes(:accepted_date => Time.now)
+      
+       @clients_service = ClientsService.create(:client_id  => @waiting_list.client.id,
+                                                :service_id => @waiting_list.service.id)
+          
       flash[:notice] = 'Client has been accepted.'
       redirect_to :action => 'index'
     else

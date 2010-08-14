@@ -48,7 +48,6 @@ class ExpendituresController < ApplicationController
   # GET /expenditures/1/edit
   def edit
     @services = Service.all
-
     @expenditure = @client.expenditures.find(params[:id])
   end
 
@@ -77,6 +76,7 @@ class ExpendituresController < ApplicationController
   
     @expenditure = Expenditure.find(params[:id])
     @expenditure.user_id = current_user.id
+    @expenditure.service_id = params[:category][:service_id]
     
     respond_to do |format|
       if @expenditure.update_attributes(params[:expenditure])

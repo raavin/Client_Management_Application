@@ -12,10 +12,11 @@ class ClientsController < ApplicationController
     @countries  = params[:client]
     @categories = Category.find(:all,:order => "service_id, name") 
     if params[:searchclients]
-    @clients = Client.paginate :per_page => 100, :page => params[:page], :order => 'first_name, last_name', :conditions => ['first_name LIKE ? OR last_name LIKE ?',"%#{params[:searchclients]}%","%#{params[:searchclients]}%"] 
+    @clients = Client.paginate :per_page => 100, :page => params[:page], :order => 'first_name, last_name', 
+      :conditions => ['first_name LIKE ? OR last_name LIKE ?',"%#{params[:searchclients]}%","%#{params[:searchclients]}%"] 
     @case_notes  = CaseNote.find(:first, :conditions => ['client_id = ?',@client])
   else
-    @clients = Client.paginate :per_page => 10, :page => params[:page], :order => 'last_name, first_name'
+    @clients = Client.paginate :per_page => 10,  :page => params[:page], :order => 'last_name, first_name'
     # @case_notes  = CaseNote.find(:first, :conditions => ['client_id = ?',"#{4}"])
     end
     @services = Service.find(:all, :order => "service_name")
@@ -77,6 +78,7 @@ class ClientsController < ApplicationController
   # PUT /clients/1
   # PUT /clients/1.xml
   def update
+    params[:client][:service_ids] ||=[]
     @client = Client.find(params[:id])
 
     respond_to do |format|

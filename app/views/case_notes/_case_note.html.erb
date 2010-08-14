@@ -5,8 +5,8 @@
   </div>
 
   <div class="group">
-    <%= f.label :body, t("activerecord.attributes.expenditure.body", :default => "Body"), :class => :label %>
-    <%= f.text_area :body, :class => 'text_area' %>
+    <%=h f.label :body, t("activerecord.attributes.expenditure.body", :default => "Body"), :class => :label %>
+    <%=h f.text_area :body, :class => 'text_area' %>
     <span class="description">Ex: a simple text</span>
   </div>
         

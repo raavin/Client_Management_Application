@@ -5,6 +5,7 @@ class CaseNotesController < ApplicationController
   cattr_reader :per_page
   @@per_page = 50
   filter_access_to :all
+  
   # GET /case_notes
   # GET /case_notes.xml
   def index

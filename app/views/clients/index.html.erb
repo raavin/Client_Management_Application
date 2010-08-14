@@ -71,7 +71,7 @@
     
     <% case_note = CaseNote.find(:first,:conditions => ['client_id = ' + client.id.to_s], :order => 'updated_at DESC')%>
     <% if !case_note.nil?%>
-    <%= link_to truncate(case_note.subject + ": " + case_note.body,50) , client_case_notes_path(@case_note, client) %>
+    <%= link_to h(truncate(case_note.subject + ": " + case_note.body,50)) , client_case_notes_path(@case_note, client) %>
     <% else %>
     <%= link_to 'Add new casenote' , new_client_case_note_path(@case_note, client) %>
     <%end%>

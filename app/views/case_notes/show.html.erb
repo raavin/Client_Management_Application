@@ -11,12 +11,12 @@
       
         <p>
           <b><%= t("activerecord.attributes.case_note.user_id", :default => t("activerecord.labels.user_id", :default => "User")) %>:</b>
-          <%= @case_note.user_id %>
+          <%=h @case_note.user_id %>
         </p>
 
         <p>
           <b><%= t("activerecord.attributes.case_note.client_id", :default => t("activerecord.labels.client_id", :default => "Client")) %>:</b>
-          <%= @case_note.client_id %>
+          <%=h @case_note.client_id %>
         </p>
 
         <p>
@@ -26,12 +26,12 @@
 
         <p>
           <b><%= t("activerecord.attributes.case_note.subject", :default => t("activerecord.labels.subject", :default => "Subject")) %>:</b>
-          <%= @case_note.subject %>
+          <%=h @case_note.subject %>
         </p>
 
         <p>
           <b><%= t("activerecord.attributes.case_note.body", :default => t("activerecord.labels.body", :default => "Body")) %>:</b>
-          <%= @case_note.body %>
+          <%=h @case_note.body %>
         </p>
       <div class="wat-cf">
         <%= link_to "#{image_tag("web-app-theme/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}")} #{t("web-app-theme.edit", :default=> "Edit")}", edit_client_case_note_path(@client,@case_note), :class => "button" %> 

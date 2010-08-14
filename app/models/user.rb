@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :confirmable, :lockable, :timeoutable and :activatable
-  devise :registerable, :database_authenticatable, :recoverable,
-         :rememberable, :trackable, :validatable
+  devise :registerable, :database_authenticatable, :recoverable, :activatable,
+         :rememberable, :trackable, :validatable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :role_ids

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   before_filter { |c| Authorization.current_user = c.current_user }
+  filter_parameter_logging :password
   
   def permission_denied  
     flash[:error] = "Sorry, you not allowed to access that page."  

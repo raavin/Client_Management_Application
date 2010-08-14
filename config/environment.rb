@@ -17,6 +17,10 @@ Rails::Initializer.run do |config|
   config.gem 'devise'
   config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
   config.gem 'declarative_authorization', :source => 'http://gemcutter.org'
+  config.gem "rspec", :lib => false, :version => ">=1.2.2"  
+  config.gem "rspec-rails", :lib => false, :version => ">=1.2.2"  
+  config.gem "webrat", :lib => false, :version => ">=0.4.3"  
+  config.gem "cucumber", :lib => false, :version => ">=0.2.2" 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"

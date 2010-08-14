@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100810031636) do
+ActiveRecord::Schema.define(:version => 20100813104212) do
 
   create_table "case_notes", :force => true do |t|
     t.integer  "user_id"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(:version => 20100810031636) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "clients_services", :id => false, :force => true do |t|
+    t.integer "client_id"
+    t.integer "service_id"
+  end
+
+  add_index "clients_services", ["client_id"], :name => "index_clients_services_on_client_id"
+  add_index "clients_services", ["service_id"], :name => "index_clients_services_on_service_id"
 
   create_table "countries", :force => true do |t|
     t.string  "iso"

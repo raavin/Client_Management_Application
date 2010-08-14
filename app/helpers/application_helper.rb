@@ -50,4 +50,10 @@ module ApplicationHelper
     diff_minutes = diff_seconds / 60
     return diff_minutes
   end
+  
+  def in_service?(user_service_id_in_question)
+    @_list ||= client.services.collect(&:id)
+    # return true if @_list.include?("admin") #This is the culprit.
+    (@_list.include?(user_service_id_in_question.to_s) )
+  end
 end

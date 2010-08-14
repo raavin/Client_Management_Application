@@ -35,20 +35,7 @@
     </div>    
     <div id="wrapper" class="wat-cf">
       <div class="flash">
-     <% if flash[:notice] && flash[:error]%> 
-        <% if flash[:notice]%> 
-        <div class="message notice"><p><%= flash[:notice] %></p></div>
-        <%end%>
-    <%elsif flash[:error]%>
-          <div class="message error"><p><%= flash[:error] %></p></div>
-    <%elsif flash[:warning]%>
-          <div class="message warning"><p><%= flash[:warning] %></p></div>
-    <%else%>
-        <% if flash[:notice]%>
-          <div class="message notice"><p><%= flash[:notice] %></p></div>
-        <%end%>
-    <%end%>
-      </div>
+     
       <div id="main">
         <%= yield %>
         <div id="footer">

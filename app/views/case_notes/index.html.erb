@@ -21,14 +21,14 @@
         <% @case_notes.each do |case_note| -%>
         <tr class="<%= cycle("odd", "even") %>">
           <td>
-            <%= case_note.id %>
+            <%=h case_note.id %>
           </td>
 										<td>
 						<%= link_to case_note.user.email, client_case_note_path(@client,case_note) %><br />
-						<%= case_note.created_at %>
+						<%=h case_note.created_at %>
 					</td>
 										<td>
-            <%= case_note.body %>
+            <%=h case_note.body %>
           </td>
           <td class="last">
             <%= link_to "#{t("web-app-theme.show", :default => "Show")}", client_case_note_path(@client,case_note) %> |
