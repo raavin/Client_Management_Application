@@ -1,6 +1,6 @@
 authorization do  
   role :admin do  
-  has_permission_on [:clients, :services, :waiting_lists, :categories, :messages, :roles, :users, :authorization_rules, :case_notes, :expenditures], :to => [:index, :show, :new, :create, :edit, :update, :destroy, :waiting, :accept, :complete]  
+  has_permission_on [:clients, :services, :waiting_lists, :categories, :messages, :roles, :users, :authorization_rules, :case_notes, :expenditures], :to => [:index, :show, :new, :create, :edit, :update, :destroy, :waiting, :accept, :complete, :all]  
   has_permission_on [:authorization_rules, :authorization_usages], :to => :read
   end  
     

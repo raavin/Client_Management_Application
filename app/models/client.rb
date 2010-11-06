@@ -4,4 +4,10 @@ class Client < ActiveRecord::Base
   has_many :expenditures
   has_many :waiting_lists
   has_and_belongs_to_many :services
+  
+  def service_symbols  
+  services.map do |service|  
+    service.service_name.underscore.to_sym  
+  end  
+ end
 end

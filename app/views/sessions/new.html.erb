@@ -1,7 +1,7 @@
    <div id="box">
       <div class="block" id="block-login">
         <h2>Login</h2>
-        <div class="content login">
+        <div class="content">
           <div class="flash">
     <%if flash[:error]%>
           <div class="message error"><p><%= flash[:error] %></p></div>
@@ -15,6 +15,7 @@
           </div>
 <% form_for resource_name, resource, :url => session_path(resource_name),:html => { :class => "form"} do |f| -%>
             <div class="group wat-cf">
+              <br />
               <div class="left">
                 <label class="label right">email</label>
               </div>
@@ -39,19 +40,18 @@
                 <%= f.check_box :remember_me %>
               </div>
             </div>
-            <% end -%>
+            
             <div class="group navform wat-cf">
-              <div class="right">
-                <button class="button" type="submit">
-                  <img src="/images/web-app-theme/key.png" alt="Save" /> Login
-                </button>
-              </div>
+              <button class="button" type="submit">
+                <img src="/images/web-app-theme/tick.png" alt="Save" /> Login
+              </button>
             </div>
-            <div class="group navform wat-cf">
-              <div class="right">
-<%= render :partial => "shared/devise_links" %>
-              </div>
-            </div>
-<% end -%>
+          <% end %>
         </div>
       </div>
+ </div>
+ <%= render :partial => "shared/devise_links" %>
+ 
+<% end -%>
+        
+      

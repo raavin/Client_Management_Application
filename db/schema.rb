@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100813104212) do
+ActiveRecord::Schema.define(:version => 20100816060215) do
 
   create_table "case_notes", :force => true do |t|
     t.integer  "user_id"
@@ -63,6 +63,38 @@ ActiveRecord::Schema.define(:version => 20100813104212) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "service_id"
+  end
+
+  create_table "finances", :force => true do |t|
+    t.integer  "client_id"
+    t.integer  "user_id"
+    t.string   "description"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leave_forms", :force => true do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "leave_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leave_types", :force => true do |t|
+    t.string   "name"
+    t.string   "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "leaves", :force => true do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "leave_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "messages", :force => true do |t|

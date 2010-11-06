@@ -10,7 +10,7 @@
     <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> Client</h2>
     <div class="inner">
       <% form_for @client, :url => client_path(@client), :html => { :class => :form }, :id => @case_note do |f| -%>
-        <%= render :partial => "form", :locals => {:f => f} %>
+        <%= render :partial => @client, :locals => {:f => f} %>
       <% end -%>
     </div>
   </div>

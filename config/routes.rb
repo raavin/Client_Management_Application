@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :leave_forms
+
+  map.resources :leave_types
+
   map.resources :roles
 
   map.devise_for :users
@@ -14,6 +18,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :services
 
   map.resources :clients, :has_many => [:case_notes, :expenditures]
+  
+  map.resources :expenditures, :only => [:index]
+  
+  map.allexpenditures '/all_expenditures', :controller => 'expenditures', :action => 'all'
   
   #map.resources :case_notes
   

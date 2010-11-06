@@ -8,16 +8,23 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.xml
   def index
-   
+    @services = Service.find(:all, :order => "service_name")
     @countries  = params[:client]
     @categories = Category.find(:all,:order => "service_id, name") 
     if params[:searchclients]
-    @clients = Client.paginate :per_page => 100, :page => params[:page], :order => 'first_name, last_name', 
-      :conditions => ['first_name LIKE ? OR last_name LIKE ?',"%#{params[:searchclients]}%","%#{params[:searchclients]}%"] 
-    @case_notes  = CaseNote.find(:first, :conditions => ['client_id = ?',@client])
-  else
-    @clients = Client.paginate :per_page => 10,  :page => params[:page], :order => 'last_name, first_name'
-    # @case_notes  = CaseNote.find(:first, :conditions => ['client_id = ?',"#{4}"])
+      
+      @clients = Client.paginate :per_page => 100, :page => params[:page], 
+        :order => 'first_name, last_name', 
+        :joins => :services, 
+        :conditions => ['first_name LIKE ? OR last_name LIKE ? AND clients_services.service_id IN (?)',
+          "%#{params[:searchclients]}%","%#{params[:searchclients]}%", current_user.service_id]#TODO need to make this work
+        
+      @case_notes  = CaseNote.find(:first, :conditions => ['client_id = ?',@client])
+    else
+    
+     @clients = Client.paginate :per_page => 10, :page => params[:page], :order => 'last_name, first_name', 
+               :include => :services, :conditions => { "clients_services.service_id" => current_user.service_id}
+   
     end
     @services = Service.find(:all, :order => "service_name")
     @waiting_lists = WaitingList.find(:all)

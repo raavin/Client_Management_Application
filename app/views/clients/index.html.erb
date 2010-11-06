@@ -3,10 +3,10 @@
     <ul class="wat-cf">
 	    <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", clients_path  %></li>
   		<li><%= link_to "#{t("web-app-theme.new", :default => "New Client")}", new_client_path %></li>
-  		      <form action="/clients/" method="get" style = "padding-top: 9px; padding-left: 730px">
+  		      <% form_tag(clients_path, :method => 'get', :style => "padding-top: 9px; padding-left: 730px") do %>
               <%= text_field_tag :searchclients, params[:searchclients] %>
               <%= submit_tag "search for client", :name => nil%>
-             </form>
+           <% end%>
              
     </ul>
   </div>  
